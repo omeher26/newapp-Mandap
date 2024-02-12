@@ -1,5 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
+import { ScrollView } from 'react-native';
 import { View, Text, Image, StyleSheet, ImageBackground } from 'react-native';
 import { Card, Button, TextInput } from 'react-native-paper';
 
@@ -15,6 +16,8 @@ const ProfileScreen = () => {
     anniversary: 'February 14, 2010',
     associationName: 'Sample Association',
     imageUrl: 'https://www.tatatrusts.org/images/Ratan_N_Tata_sm.jpg',
+    aadhar:'1234 5678 9632',
+    pan:'ALSAC2543Y',
   });
 
   const handleEditToggle = () => {
@@ -40,8 +43,8 @@ const ProfileScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Card>
+    <ScrollView style={styles.container}>
+      <Card style={styles.card}>
         <ImageBackground style={styles.cover}>
           <Image style={styles.profileImage} source={{ uri: profileInfo.imageUrl }} />
         </ImageBackground>
@@ -83,6 +86,18 @@ const ProfileScreen = () => {
             onChangeText={(text) => handleChange('associationName', text)}
             editable={editable}
           />
+          <TextInput
+            label="Aadhar Card Number"
+            value={profileInfo.aadhar}
+            onChangeText={(text) => handleChange('aadhar', text)}
+            editable={editable}
+          />
+          <TextInput
+            label="Pan Card Number"
+            value={profileInfo.pan}
+            onChangeText={(text) => handleChange('pan', text)}
+            editable={editable}
+          />
         </Card.Content>
         <Card.Actions style={styles.cardActions}>
           {!editable ? (
@@ -99,15 +114,16 @@ const ProfileScreen = () => {
           </Button>
         </Card.Actions>
       </Card>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    // justifyContent: 'center',
     padding: 16,
+    marginBottom:10,
   },
   cover: {
     height: 200, // Adjust the height as needed
@@ -128,12 +144,15 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 8,
-    color: 'black', // Adjust text color for better visibility
+    color: 'black', 
   },
   cardActions: {
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
+  card:{
+    marginBottom:40,
+  }
 });
 
 export default ProfileScreen;

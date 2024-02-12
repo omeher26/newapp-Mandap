@@ -1,29 +1,28 @@
-// NewsScreen.js
 import React from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
-
-const newsData = [
-  { id: '1', title: 'News Title 1', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-  { id: '2', title: 'News Title 2', content: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-  { id: '3', title: 'News Title 3', content: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-  { id: '4', title: 'News Title 4', content: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-  { id: '5', title: 'News Title 5', content: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-  { id: '6', title: 'News Title 6', content: 'Curabitur pretium tincidunt lacus. Nulla gravida orci a odio.Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-  { id: '7', title: 'News Title 7', content: 'Integer in mauris eu nibh euismod gravida.Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-  { id: '8', title: 'News Title 8', content: 'Duis ac tellus et risus vulputate vehicula.Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-  { id: '9', title: 'News Title 9', content: 'Maecenas massa, semper in auctor a, volutpat a ligula.Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-  { id: '10', title: 'News Title 10', content: 'Pellentesque tristique lobortis est, eu venenatis nisl.Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-  { id: '11', title: 'News Title 11', content: 'Vivamus aliquet elit ac nisl ullamcorper dignissim.Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-  // Add more news items as needed
-];
+import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import newsData from './NewsData';
 
 const NewsScreen = () => {
-  const renderNewsItem = ({ item }) => (
-    <View style={styles.newsCard}>
-      <Text style={styles.newsTitle}>{item.title}</Text>
-      <Text style={styles.newsContent}>{item.content}</Text>
-    </View>
-  );
+  const navigation = useNavigation();
+
+  const renderNewsItem = ({ item }) => {
+    const truncatedContent = item.content.substring(0, 220); // Show only the first 20 characters
+    const showMoreHandler = () => {
+      // Navigate to the detailed news screen with the full content
+      navigation.navigate('NewsDetails', { newsItem: item });
+    };
+
+    return (
+      <View style={styles.newsCard}>
+        <Text style={styles.newsTitle}>{item.title}</Text>
+        <Text style={styles.newsContent}>{truncatedContent}...</Text>
+        <TouchableOpacity onPress={showMoreHandler}>
+          <Text style={styles.showMoreLink}>Show More</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -64,6 +63,11 @@ const styles = StyleSheet.create({
   newsContent: {
     fontSize: 16,
     color: '#555',
+  },
+  showMoreLink: {
+    color: 'blue',
+    textDecorationLine: 'underline',
+    marginTop: 8,
   },
 });
 

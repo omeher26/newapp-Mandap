@@ -19,20 +19,35 @@ const AnniversaryScreen = () => {
       </Card.Content>
       <Card.Actions style={styles.iconContainer}>
         <IconButton
+          style={{backgroundColor:'white',display:'none'}}
+          size={25}
+          onPress={() => handleIconPress('whatsapp')}
+        />
+        <IconButton
+          icon="phone"
+          color="#25d366"
+          style={{backgroundColor:'white'}}
+          size={25}
+          onPress={() => handleIconPress('whatsapp')}
+        />
+        <IconButton
           icon="whatsapp"
           color="#25D366"
+          style={{backgroundColor:'white'}}
           size={25}
           onPress={() => handleIconPress('whatsapp')}
         />
         <IconButton
           icon="instagram"
           color="#E4405F"
+          style={{backgroundColor:'white'}}
           size={25}
           onPress={() => handleIconPress('instagram')}
         />
         <IconButton
           icon="facebook"
           color="#4267B2"
+          style={{backgroundColor:'white'}}
           size={25}
           onPress={() => handleIconPress('facebook')}
         />

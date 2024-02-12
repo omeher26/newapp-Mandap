@@ -1,27 +1,32 @@
 
 
 import React, { useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, StyleSheet, Image, Modal, ScrollView } from 'react-native';
 import { Card, IconButton, Searchbar } from 'react-native-paper';
-import AllMembersData from './AllMemD';
+// import AllMembersData from './AllMemD';
 import AllMembersNewD from './AllMembersNewD';
+import { useNavigation } from '@react-navigation/native';
 
 const AllMembers = () => {
-    const [searchQuery, setSearchQuery] = useState(null);
+  const navigation = useNavigation();
+  const [searchQuery, setSearchQuery] = useState(null);
+  const [selectedMember, setSelectedMember] = useState(null);
   const renderItem = ({ item, index }) => (
     <Card style={styles.card}>
-      <View style={styles.cardContent}>
-        <View style={styles.leftContent}>
-          <Text style={styles.nameText}>Name: {item.name}</Text>
-          <Text style={styles.addressText}>Address: {item.address}</Text>
-          <TouchableOpacity onPress={() => sendMessage(item)}>
-            <Text style={styles.sendMessageText}>Send Message</Text>
-          </TouchableOpacity>
+      <TouchableOpacity onPress={() => handleMemberPress(item)}>
+        <View style={styles.cardContent}>
+          <View style={styles.leftContent}>
+            <Text style={styles.nameText}>Name: {item.name}</Text>
+            <Text style={styles.addressText}>Address: {item.address}</Text>
+            <TouchableOpacity onPress={() => sendMessage(item)}>
+              <Text style={styles.sendMessageText}>Send Message</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.rightContent}>
+            <Image style={styles.profileImage} source={{ uri: item.image }} />
+          </View>
         </View>
-        <View style={styles.rightContent}>
-          <Image style={styles.profileImage} source={{ uri: item.image }} />
-        </View>
-      </View>
+      </TouchableOpacity>
       <Card.Actions style={styles.iconContainer}>
         <IconButton
           icon="whatsapp"
@@ -49,6 +54,11 @@ const AllMembers = () => {
     console.log(`Sending message to ${person.name}`);
   };
 
+  const handleMemberPress = (member) => {
+    setSelectedMember(member);
+    navigation.navigate('MemberDetailScreen', { member });
+  };
+
   const handleIconPress = (platform) => {
     console.log(`Icon pressed: ${platform}`);
   };
@@ -59,9 +69,8 @@ const AllMembers = () => {
       : true
   );
   
-//   const sortedAssociations = filteredAssociations.sort((a, b) =>
-//     a.title.localeCompare(b.title)
-//   );
+  const sortedAssociations = filteredAssociations.sort((a, b) =>
+   a.name.localeCompare(b.name));
 
   return (
     <View style={styles.container}>
@@ -73,7 +82,7 @@ const AllMembers = () => {
       />
       <FlatList
         // data={AllMembersData}
-        data={filteredAssociations}
+        data={sortedAssociations}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
         style={styles.flatlist}
@@ -127,7 +136,7 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
     borderRadius: 50,
-  },
+  }
 });
 
 export default AllMembers;

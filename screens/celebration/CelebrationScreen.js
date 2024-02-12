@@ -4,8 +4,10 @@ import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import BirthdayScreen from './BirthdayScreen';
 import AnniversaryScreen from './AnniversaryScreen';
+// import { useTheme } from 'react-native-paper';
 
 const Tab = createMaterialTopTabNavigator();
+// const theme = useTheme()
 
 const CelebrationScreen = () => {
   return (

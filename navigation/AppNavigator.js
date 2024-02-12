@@ -14,6 +14,12 @@ import AllMembers from '../screens/Member Search/AllMembers';
 import InfoLeaderMainScreen from '../screens/Info of leaders/InfoLeaderMainScreen';
 import HomeMainScreen from '../screens/HomeScreen/HomeMainScreen';
 import ProfileScreen from '../screens/HomeScreen/Profile';
+import PresidentScreen from '../screens/Association/PresidentScreen';
+import SecretaryScreen from '../screens/Association/SecretaryScreen';
+import BODScreen from '../screens/Association/BODScreen';
+import MembersScreen from '../screens/Association/MembersScreen';
+import MemberDetailScreen from '../screens/Member Search/MemberDetailScreen';
+import NewsDetailScreen from '../screens/News Events/NewsDetailScreen';
 // import { createDrawerNavigator } from '@react-navigation/drawer';
 
 
@@ -43,6 +49,12 @@ const AppNavigator = () => {
         <Stack.Screen name="AssociationMainScreen" component={AssociationMainScreen} />
         <Stack.Screen name="AllMembers" component={AllMembers} />
         <Stack.Screen name="InfoLeaderMainScreen" component={InfoLeaderMainScreen} />
+        <Stack.Screen name="President" component={PresidentScreen} />
+        <Stack.Screen name="Secretary" component={SecretaryScreen} />
+        <Stack.Screen name="bod" component={BODScreen} />
+        <Stack.Screen name="Member" component={MembersScreen} />
+        <Stack.Screen name="MemberDetailScreen" component={MemberDetailScreen} />
+        <Stack.Screen name="NewsDetails" component={NewsDetailScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

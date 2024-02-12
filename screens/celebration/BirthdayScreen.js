@@ -18,20 +18,33 @@ const BirthdayScreen = () => {
       </Card.Content>
       <Card.Actions style={styles.iconContainer}>
         <IconButton
-          icon="whatsapp"
-          color="#25d366"
+          style={{backgroundColor:'white',display:'none'}}
           size={25}
           onPress={() => handleIconPress('whatsapp')}
         />
         <IconButton
+          icon="phone"
+          style={{backgroundColor:'white'}}
+          size={25}
+          onPress={() => handleIconPress('phone')}
+        />
+        <IconButton
           icon="instagram"
-          color="#E4405F"
+          style={{backgroundColor:'white'}}
           size={25}
           onPress={() => handleIconPress('instagram')}
         />
         <IconButton
+          icon="whatsapp"
+          // color="#25d366"
+          style={{backgroundColor:'white'}}
+          size={25}
+          onPress={() => handleIconPress('whatsapp')}
+        />
+        <IconButton
           icon="facebook"
-          color="#4267B2"
+          // color="#4267B2"
+          style={{backgroundColor:'white'}}
           size={25}
           onPress={() => handleIconPress('facebook')}
         />
@@ -68,6 +81,7 @@ const styles = StyleSheet.create({
   },
   card: {
     marginBottom: 16,
+    // backgroundColor:'white'
   },
   nameText: {
     fontSize: 18,
@@ -85,6 +99,8 @@ const styles = StyleSheet.create({
   },
   iconContainer: {
     justifyContent: 'flex-end',
+    // backgroundColor:'yellow',
+    // color:'red'
   },
 });
 
